@@ -1,0 +1,37 @@
+In this part of the 3rd question the network given in the figure is implemented using the 'high' level API
+functions. Inputs are divided by 255 in order to place the numbers between 0-1. Dividing by 255 was rooted from the fact that inputs are
+pixel values of images. System consists of total a total of 3 convolution layers, 3 pooling layers each are placed after
+a convolution layer. After the third pooling layer 2 fully connected layers are present. Fully connected
+layers have 128 and 10 neurons respectively. Outside the network, a softmax activation function completes the 
+network's guess for each image. Input size is not changed in conv. layers but downsampled to half of the input'size
+size in each pooling layers. 
+
+In network definition, pooling type is not specified, AVG pooling is choosen in order to
+reduce information loss between layers. In max pooling final train_acc,test_acc = [0.71, 0.71],  while the
+final train_acc, test_acc = [0.72, 0.72] in average pooling, after 10 epochs. Here and later "computation time"
+refers to neither training, nor test time but a mixture of them. Time is calculated the execution duration of the 14th cell
+given by Google CoLab when mouse is hovered on the 'play' button, hw accelerator is choosen as GPU. Computation time of each 
+option resulted around 65 seconds.
+
+However, both of the implementations' lower API versions resulted in a shorter computation duration of
+50 seconds. This is due to fact that lower level API gives more work for the programmer but it is purified from the overheads of
+high-level functions. In general, it can be said that, lower level API can result in faster implementation.
+
+Another unspecified point was the batch size, with batch_size 128, computation time for 10 epochs is ~65secs. and 
+final test acc. is aroung 72%. When batch_size is reduced to 32, computation time for 10 epochs increased to 120 secs. while
+final test acc. increased to 73%. One reason of the accuracy increase [1] can be the fact that smaller batch sizes are noisy, 
+offering a regularizing effect and lower generalization error.
+
+Dropout is implemented by using different dropout rates for test and training feed_dict's. Original dropout rates are 
+0.4 and 0.01 for train and test respectively. When dropout is set to 0.99 for each function,test accuracy decreased to 0.1
+network doesn't learn anything during training and 1st fully connected layer neurons are not working, guess is completely randomized by output neurons.
+Later dropout is set to 0.99 and 0.01 for training and test respectively final test result was again 0.1. This time neurons were on for inference but,
+they were off while training hence, no learning observed. Turning off the neurons (dropout = 0.99 in both) did not changed the computation time.
+
+When epoch number is increased to 20 from 10, final test accuracy also increased to 76%.Moreover, computation time is also 
+increased to 120 secs.
+
+When we bypass the batch_normalization, final test accuracy drop to 66% from 76% in 20 epochs. Moreover, computation
+time is decreased to 110 seconds since network's computation cost is decreased.
+
+[1] https://machinelearningmastery.com/how-to-control-the-speed-and-stability-of-training-neural-networks-with-gradient-descent-batch-size/
