@@ -1,0 +1,10 @@
+1)relu kullandım, açık renkli oldu. loss 0.022
+2)relu yerine sigmoid koydum, loss : 0.022 ve resim biraz daha düzeldi.
+3) lr 0.1 => 0.3 loss: 0.018 resimler daha iyileşti.
+4) lr 0.1 iken relu denendi loss : 0.23 resimler daha kötü
+5) lr 0.1 iken tanh denendi loss: 0.017 en iyi hal şu ana kadarki
+6) 5in üstüne epoch size 100 -> 300 yapıldı, lr 0.3 -> 0.5 loss : 0.017
+7) scheduled lr denendi 70 e kadar 0.5, 200e kadar 0.3 300e kadar 0.1 loss : 0.0170000
+8) Adam opt. lr 0.0001 denendi loss:0.01685
+10) hidden layer relu yapıldı, outputa sigmoid kondu, adagrad scheduled lr 70 e kadar 0.5, 200e kadar 0.3 
+ loss : 0.010 	***********EN İYİ SONUÇ**************

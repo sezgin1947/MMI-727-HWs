@@ -1,0 +1,22 @@
+1) gen loss :0, disc_loss: inf
+2) mb 100 den 10'a düştü, gen loss 0 -> nan, disc_loss inf -> nan
+3) generator_input dist. uniform -> normal bişi değişmedi.
+4) relu -> tanh bişey değişmedi
+5) hiddenlar relu, output sigmoid -> tanh, genloss : nan, disc_loss: -0.6931 stuck
+6) variable scope olayı incelendi, disc ve gen için variablelar sürekli güncellenmiyor.
+7) adagrad to adam generator gene nan, discriminator 0.6931'de stuck ancak daha geç stuck oluyor.
+8) generator, discriminatorun 5 katı çalışıyor. sonuç : FAIL AGAIN
+9) generator, discriminatorun 5te biri kadar çalışıyor sonuç : FAIL AGAIN
+10) I couldnt fix the weight sharing issue while i was using tf.layers.dense, hence after some time i gave up and used the
+low level functions tf.nn.matmul etc. with variables initialized by hand. After that I was able to train the network.
+However, I still wonder whether there is a way to train the network while using tf.layers.dense module
+11) after 70th epoch, gen loss went inf. then added an epsilon to disc. output. helped but not a lot.
+12) disc. output is nan after 40th epoch. lr 0.0003 to 0.0001. rsult : better but still some NaNs occur, generator
+only generates 9s xd.
+13) loss function değişti, sonuç : NaN olmuyor ancak network 8-9 üretmeye meyilli
+14)mb_size 128 -> 32 sonuç : ilerleme olmadı
+15) generator, discriminatorun 3 katı çalışsın sonuç: loss is smaller but outputs are not sufficent
+16) back to old training func. still gen works 3 times of disc. works. PEK DEĞİŞMEDİ
+17) digit spesifik training: SALLA
+18) 600 epoch mbsize 256 : meh
+19) gen worked 10 times disc. worked. converged to 0s
